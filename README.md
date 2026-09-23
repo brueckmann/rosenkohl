@@ -8,7 +8,8 @@
 <!-- badges: end -->
 
 The goal of rosenkohl is to easily load some frequently used helper
-functions.
+functions. They are mostly useful for on-the-fly testing and or
+preparations.
 
 ## Installation
 
@@ -23,15 +24,16 @@ pak::pak("brueckmann/rosenkohl")
 ## Example
 
 This is a basic example which shows you how to sort a string
-alphabetically.
+alphabetically, using `abc()`. This is intended to be used
+*interactively*, therefore, it comes with multiple output formats.
 
 ``` r
 library(rosenkohl)
 ## basic example code
 
 ### assume you have unordered strings
-x <- "charlie,delta,alpha,bravo"
-y <- c("delta", "charlie", "bravo", "alpha")
+x <- "charlie, delta, alpha,bravo"
+y <- c("delta", "charlie bravo", "alpha")
 
 ### see the different output formats and the aliases
 abc(x, format_output = TRUE)
@@ -46,16 +48,16 @@ abc(x, format_output = "inline")
 
 abc(y, format_output = TRUE)
 #> c("alpha",
-#> "bravo",
-#> "charlie",
+#> "charlie bravo",
 #> "delta")
 abc(y, format_output = FALSE)
-#> [1] "alpha"   "bravo"   "charlie" "delta"
+#> [1] "alpha"         "charlie bravo" "delta"
 alphabetize(y, format_output = "inline")
-#> alpha, bravo, charlie, delta
+#> alpha, charlie bravo, delta
 ```
 
-This is a (very constructed) example which shows how sourcelines works.
+This is a (very constructed) example which shows how `sourcelines()`
+works.
 
 ``` r
 library(rosenkohl)
@@ -105,6 +107,35 @@ sourcelines(inputfile, c(1,3:4), TRUE)
 #> 
 #> > NA
 #> [1] NA
+```
+
+This is a tiny example of how `add_date()` can be used:
+
+``` r
+library(rosenkohl)
+## basic example code
+add_date("example", "_from_")
+#> [1] "example_from_2026_09_23"
+add_date("today.R")
+#> [1] "today_2026_09_23.R"
+
+# create temp folder with subfolder demo
+# define your path
+temp <- file.path(tempdir(), "demo")
+# remove everything in temp
+unlink(temp, recursive = TRUE)   
+# create directory 
+dir.create(temp)
+
+writeLines("x",        
+           file.path(temp, 
+                     add_date("test.R")
+           )
+) 
+
+#return file names 
+list.files(temp)
+#> [1] "test_2026_09_23.R"
 ```
 
 ## Bug reports
