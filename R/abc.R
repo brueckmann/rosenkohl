@@ -37,4 +37,7 @@ abc <- function(text, format_output = TRUE) {
 #' @rdname abc
 #' @export
 alphabetise <- abc
+
+#' @rdname abc
+#' @export
 alphabetize <- abc

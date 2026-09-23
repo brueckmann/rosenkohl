@@ -3,11 +3,14 @@
 \name{abc}
 \alias{abc}
 \alias{alphabetise}
+\alias{alphabetize}
 \title{abc sort anything alphabetically function}
 \usage{
 abc(text, format_output = TRUE)
 
 alphabetise(text, format_output = TRUE)
+
+alphabetize(text, format_output = TRUE)
 }
 \arguments{
 \item{text}{A character vector with multiple entries or with comma separated text}
