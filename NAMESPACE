@@ -3,3 +3,4 @@
 export(abc)
 export(alphabetise)
 export(alphabetize)
+export(sourcelines)
