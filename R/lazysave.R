@@ -1,10 +1,30 @@
-lazysave <- function(x, dir = tempdir(), date = FALSE, datesep = "_" , extension = "rds") {
+#' lazysave
+#'
+#' @param x an object, usually a dataframe to be saved
+#' @param dir path where you want to save
+#' @param date TRUE appends the date, similar to `add_date()`
+#' @param datesep a character string, can be set to empty, between name and date
+#' @param extension either ".rds" (default) or ".Rdata" 
+#' @param quiet TRUE doesn't show success message
+#'
+#' @returns a file saved on disk
+#' @export
+#'
+#' @examples
+#' lazysave(df, date=TRUE, datesep = "")
+lazysave <- function(x, dir = tempdir(), date = FALSE, datesep = "_" , extension = "rds" , quiet = FALSE) {
   # turns the unevaluated argument into the corresponding string
-  name <- deparse(substitute(x))
-  # make extension correct
-  ext <- tolower(extension) #lower-case them all
-  if (length(grep("\\.", ext))==1) {  ## if there is a dot , remove it 
-    ext <- gsub("\\.", "", ext)
+  dataframe <- deparse(substitute(x))
+  # how to output the directory
+  if(dir==tempdir()){
+   dirreturn <- "`tempdir`"
+ } else {
+   dirreturn <- substitute(dir)
+ }
+   # make extension correct
+  ext <- tolower(extension) # lower-case them all
+  if (length(grep("\\.", ext))==1) {  # is there a dot in the name?
+    ext <- gsub("\\.", "", ext) # remove all dots
   }
   ext <- gsub("^", ".", ext)
   if (ext == ".rdata") { 
@@ -17,19 +37,22 @@ lazysave <- function(x, dir = tempdir(), date = FALSE, datesep = "_" , extension
   if (!dir.exists(dir)) {
     dir.create(dir, recursive = TRUE)
   }
-  if (ext == ".rds") {
-    if (date == FALSE) {
-      saveRDS(x, file = file.path(dir, paste0(name, ".rds")))
-    } else {
-      saveRDS(x, file = file.path(dir, paste0(name, datesep, gsub("-","_", Sys.Date()), ".rds")))
-    }
+  if (date == FALSE) {
+    name <- paste0(dataframe, ext)
   } else {
-    if (date == FALSE) {
-      save(list = name, file = file.path(dir, paste0(name, ext)), envir = parent.frame())
-    } else {
-      save(list = name, file = file.path(dir, paste0(name, datesep, gsub("-","_", Sys.Date()), ext)), envir = parent.frame())
-    }
-    }
-  message( paste0(name, " saved to " , dir, " as " , ext)  )
+    name <- paste0(dataframe, datesep, gsub("-","_", Sys.Date()), ext) 
   }
+  if (ext == ".rds") {
+    saveRDS(x, file = file.path(dir, name))
+  } else {
+    save(list = dataframe, file = file.path(dir, name), envir = parent.frame())
+  }
+  if (quiet == FALSE) {
+  message(paste0("Success!", 
+                 dataframe," as " , name, " saved to " , dirreturn ,
+                 " (", dir, ")."
+                 )
+          )
+  }  
+}
 
