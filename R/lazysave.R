@@ -48,7 +48,7 @@ lazysave <- function(x, dir = tempdir(), date = FALSE, datesep = "_" , extension
     save(list = dataframe, file = file.path(dir, name), envir = parent.frame())
   }
   if (quiet == FALSE) {
-  message(paste0("Success!", 
+  message(paste0("Success! ", 
                  dataframe," as " , name, " saved to " , dirreturn ,
                  " (", dir, ")."
                  )

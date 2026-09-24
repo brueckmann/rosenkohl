@@ -19,7 +19,9 @@ knitr::opts_chunk$set(
 <!-- badges: end -->
 
 The goal of rosenkohl is to easily load some frequently used helper functions.
-They are mostly useful for on-the-fly testing and or preparations.
+They are mostly useful for on-the-fly testing and or data preparations. 
+
+**NOTE:** This is mostly a toy package created because of a discussion over lunch at [Uni Bern's IPW](https://www.ipw.unibe.ch/). My colleagues thought I was (still) talking about [R Packages](https://r-pkgs.org), when I mentioned [rosenkohl](https://upload.wikimedia.org/wikipedia/commons/d/d4/Brussels_sprouts_-_geograph.org.uk_-_684256.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original), Brussels sprouts. Somehow, we ended up joking that this R package should exist. Now, it does! I use it to bundle helper functions I sometimes use.
 
 ## Installation
 
@@ -105,11 +107,45 @@ list.files(temp)
 ```
 
 
+This is a tiny example of how to save with `lazysave()`:
+```{r example lazysave}
+library(rosenkohl)
+
+# create a dataframe called data
+data <- data.frame(x = 1, 
+                   y = 1:10, 
+                   char = sample(LETTERS[1:3], 10, replace = TRUE))
+
+# create temp folder with a subfolder
+# define your path
+temp <- file.path(tempdir(), "demo")
+# remove everything in temp
+unlink(temp, recursive = TRUE)   
+# create directory 
+dir.create(temp)
+
+
+lazysave(data)
+list.files(temp) # still empty, as default path out is tempdir.
+
+# you may append the date to the filename
+lazysave(data, dir = temp, date=TRUE, datesep = "", extension = "rdata")
+# return file names 
+list.files(temp) # file saved.
+
+# lazysave() doesn't mind dot(s) in extensions  (but rds is the default)
+lazysave(data, dir = temp, date=TRUE, datesep = "-", extension = ".r.ds.")
+# lazysave() doesn't mind capitalisation or not in extension
+lazysave(data, dir = temp, extension = "RDATA")
+
+```
 
 
 ## Bug reports
 
 Report an issue on [https://github.com/brueckmann/rosenkohl/issues](https://github.com/brueckmann/rosenkohl/issues).
+
+## Even 
 
 <!-- You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this. -->
 
