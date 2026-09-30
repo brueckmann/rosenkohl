@@ -4,7 +4,7 @@
 \alias{abc}
 \alias{alphabetise}
 \alias{alphabetize}
-\title{abc sort anything alphabetically function}
+\title{sort anything alphabetically}
 \usage{
 abc(text, format_output = TRUE)
 
@@ -21,7 +21,7 @@ alphabetize(text, format_output = TRUE)
 A character vector.
 }
 \description{
-abc sort anything alphabetically function
+sort anything alphabetically
 }
 \examples{
  x <- "charlie,delta,alpha,bravo"

@@ -1,4 +1,4 @@
-#' lazysave
+#' save stuff with date lazily
 #'
 #' @param x an object, usually a dataframe to be saved
 #' @param dir path where you want to save

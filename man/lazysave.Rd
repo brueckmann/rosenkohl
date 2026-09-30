@@ -2,7 +2,7 @@
 % Please edit documentation in R/lazysave.R
 \name{lazysave}
 \alias{lazysave}
-\title{lazysave}
+\title{save stuff with date lazily}
 \usage{
 lazysave(
   x,
@@ -30,7 +30,7 @@ lazysave(
 a file saved on disk
 }
 \description{
-lazysave
+save stuff with date lazily
 }
 \examples{
 lazysave(df, date=TRUE, datesep = "")

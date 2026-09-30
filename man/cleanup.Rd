@@ -4,8 +4,7 @@
 \alias{cleanup}
 \alias{tempex}
 \alias{temprm}
-\title{Cleanup
-cleanup: remove objects whose names match a pattern (usually "temp_" or "_temp")}
+\title{Remove objects whose names match a pattern}
 \usage{
 cleanup(
   pattern = "(_temp|temp_)",
@@ -41,8 +40,7 @@ temprm(
 empty character string
 }
 \description{
-Cleanup
-cleanup: remove objects whose names match a pattern (usually "temp_" or "_temp")
+To remove temporary objects (usually named "temp_" or "_temp")
 }
 \examples{
 cleanup()

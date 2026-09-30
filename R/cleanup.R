@@ -1,7 +1,8 @@
 
-#'Cleanup
-#'cleanup: remove objects whose names match a pattern (usually "temp_" or "_temp")
+#' Remove objects whose names match a pattern 
 #'
+#' To remove temporary objects (usually named "temp_" or "_temp") 
+#' 
 #' @param pattern What shall be searched for.
 #' @param envir usually the GlobalEnvironment
 #' @param keep.functions TRUE if you do not want to remove temporary functions

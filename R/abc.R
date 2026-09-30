@@ -1,4 +1,4 @@
-#' abc sort anything alphabetically function
+#' sort anything alphabetically 
 #'
 #' @param text A character vector with multiple entries or with comma separated text
 #' @param format_output TRUE returns a character vector, FALSE returns ordered elements, inline returns text
