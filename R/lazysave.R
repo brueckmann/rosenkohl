@@ -12,6 +12,33 @@
 #'
 #' @examples
 #' lazysave(df, date=TRUE, datesep = "")
+#' # More detailed examples
+#' # create a dataframe called data 
+#' data <- data.frame(x = 1, 
+#' y = 1:10, 
+#' char = sample(LETTERS[1:3], 10, replace = TRUE)) 
+#' # create temp folder with a subfolder
+#' # define your path
+#' temp <- file.path(tempdir(), "demo")
+#' # remove everything in temp
+#' unlink(temp, recursive = TRUE)   
+#' # create directory 
+#' dir.create(temp)
+#' 
+#' 
+#' lazysave(data)
+#' list.files(temp) # still empty, as default path out is tempdir.
+#' 
+#' # you may append the date to the filename
+#' lazysave(data, dir = temp, date=TRUE, datesep = "", extension = "rdata")
+#' # return file names 
+#' list.files(temp) # file saved.
+#' 
+#' # lazysave() doesn't mind dot(s) in extensions  (but rds is the default)
+#' lazysave(data, dir = temp, date=TRUE, datesep = "-", extension = ".r.ds.")
+#' # lazysave() doesn't mind capitalisation or not in extension
+#' lazysave(data, dir = temp, extension = "RDATA")
+
 lazysave <- function(x, dir = tempdir(), date = FALSE, datesep = "_" , extension = "rds" , quiet = FALSE) {
   # turns the unevaluated argument into the corresponding string
   dataframe <- deparse(substitute(x))
