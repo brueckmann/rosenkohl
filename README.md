@@ -124,9 +124,9 @@ This is a tiny example of how `add_date()` can be used:
 library(rosenkohl)
 ## basic example code
 add_date("example", "_from_")
-#> [1] "example_from_2026_09_24"
+#> [1] "example_from_2026_09_30"
 add_date("today.R")
-#> [1] "today_2026_09_24.R"
+#> [1] "today_2026_09_30.R"
 
 # create temp folder with subfolder demo
 # define your path
@@ -144,7 +144,7 @@ writeLines("x",
 
 #return file names 
 list.files(temp)
-#> [1] "test_2026_09_24.R"
+#> [1] "test_2026_09_30.R"
 ```
 
 This is a tiny example of how to save with `lazysave()`:
@@ -167,23 +167,70 @@ dir.create(temp)
 
 
 lazysave(data)
-#> Success! data as data.rds saved to `tempdir` (/var/folders/pk/h829gy097wn5t4s545qbf60m0000gp/T//RtmpkpaDLI).
+#> Success! data as data.rds saved to `tempdir` (/var/folders/pk/h829gy097wn5t4s545qbf60m0000gp/T//Rtmpc7uGVE).
 list.files(temp) # still empty, as default path out is tempdir.
 #> character(0)
 
 # you may append the date to the filename
 lazysave(data, dir = temp, date=TRUE, datesep = "", extension = "rdata")
-#> Success! data as data2026_09_24.RData saved to temp (/var/folders/pk/h829gy097wn5t4s545qbf60m0000gp/T//RtmpkpaDLI/demo).
+#> Success! data as data2026_09_30.RData saved to temp (/var/folders/pk/h829gy097wn5t4s545qbf60m0000gp/T//Rtmpc7uGVE/demo).
 # return file names 
 list.files(temp) # file saved.
-#> [1] "data2026_09_24.RData"
+#> [1] "data2026_09_30.RData"
 
 # lazysave() doesn't mind dot(s) in extensions  (but rds is the default)
 lazysave(data, dir = temp, date=TRUE, datesep = "-", extension = ".r.ds.")
-#> Success! data as data-2026_09_24.rds saved to temp (/var/folders/pk/h829gy097wn5t4s545qbf60m0000gp/T//RtmpkpaDLI/demo).
+#> Success! data as data-2026_09_30.rds saved to temp (/var/folders/pk/h829gy097wn5t4s545qbf60m0000gp/T//Rtmpc7uGVE/demo).
 # lazysave() doesn't mind capitalisation or not in extension
 lazysave(data, dir = temp, extension = "RDATA")
-#> Success! data as data.RData saved to temp (/var/folders/pk/h829gy097wn5t4s545qbf60m0000gp/T//RtmpkpaDLI/demo).
+#> Success! data as data.RData saved to temp (/var/folders/pk/h829gy097wn5t4s545qbf60m0000gp/T//Rtmpc7uGVE/demo).
+```
+
+This exemplifies the cleanup function `cleanup()`, which can also me
+called `tempex()` or `temprm()`
+
+``` r
+library(rosenkohl)
+
+## Create some noise. 
+### create things to be kept
+temptation_to_keep <- data.frame(x = 1, 
+                         y = 1:10, 
+                         char = sample(LETTERS[1:3], 10, replace = TRUE))
+url_to_keep <- "https://www.nothing_temp.csv"
+### create things to be deleted: 
+list_temp <- c(char = sample(LETTERS[1:3], 10, replace = TRUE))
+temp_url <- "https://raw.githubusercontent.com/tidyverse/dplyr/main/data-raw/starwars.csv"
+temp_dir <- file.path(tempdir(), "demo")
+#### define a temp function
+temp_function <- function(x) {
+x + 1
+}
+## Some noice was created.
+# use function but turn off  verbose
+cleanup(verbose = FALSE)
+
+# use function with own pattern
+cleanup(pattern = "_to_keep")
+#> No objects matched pattern: _to_keep
+
+## create another temporary list again
+temporary_list <- c("something", "else")
+# use function with own pattern
+cleanup(pattern="temporary_")
+#> No objects matched pattern: temporary_
+
+# use function when nothing is available that matches the pattern
+cleanup(pattern="precious")
+#> No objects matched pattern: precious
+
+# use function when nothing is available matching the pattern - but a function
+cleanup()
+#> No objects matched pattern: (_temp|temp_)
+
+# remove the temp-function
+cleanup(keep.functions = FALSE)
+#> No objects matched pattern: (_temp|temp_)
 ```
 
 ## Bug reports
