@@ -1,12 +1,14 @@
 
 #' Remove objects whose names match a pattern 
 #'
-#' To remove temporary objects (usually named "temp_" or "_temp") 
+#' To remove temporary objects (usually named "temp_" or "_temp") from an R 
+#' environment.
 #' 
-#' @param pattern What shall be searched for.
+#' @param pattern what shall be searched for?
 #' @param envir usually the GlobalEnvironment
-#' @param keep.functions TRUE if you do not want to remove temporary functions
-#' @param verbose gives feedback or none 
+#' @param keep.functions keeps functions (defaults to TRUE) matching the 
+#' pattern, set to FALSE if you want to remove functions, too
+#' @param verbose hide the output if you set to "FALSE"
 #'
 #' @returns empty character string 
 #' @export
@@ -48,6 +50,7 @@
 #' 
 #' # remove the temp-function
 #' cleanup(keep.functions = FALSE)
+
 cleanup <- function(pattern = "(_temp|temp_)", envir = .GlobalEnv, keep.functions = TRUE, verbose = TRUE) {
   # list matching objects in the target environment
   matches <- ls(envir = envir, pattern = pattern, all.names = TRUE)

@@ -28,19 +28,21 @@ temprm(
 )
 }
 \arguments{
-\item{pattern}{What shall be searched for.}
+\item{pattern}{what shall be searched for?}
 
 \item{envir}{usually the GlobalEnvironment}
 
-\item{keep.functions}{TRUE if you do not want to remove temporary functions}
+\item{keep.functions}{keeps functions (defaults to TRUE) matching the
+pattern, set to FALSE if you want to remove functions, too}
 
-\item{verbose}{gives feedback or none}
+\item{verbose}{hide the output if you set to "FALSE"}
 }
 \value{
 empty character string
 }
 \description{
-To remove temporary objects (usually named "temp_" or "_temp")
+To remove temporary objects (usually named "temp_" or "_temp") from an R
+environment.
 }
 \examples{
 cleanup()
