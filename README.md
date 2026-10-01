@@ -5,6 +5,7 @@
 
 <!-- badges: start -->
 
+[![R-CMD-check](https://github.com/brueckmann/rosenkohl/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/brueckmann/rosenkohl/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The goal of rosenkohl is to easily load some frequently used helper
@@ -169,23 +170,23 @@ dir.create(temp)
 
 
 lazysave(data)
-#> Success! data as data.rds saved to `tempdir` (/var/folders/pk/h829gy097wn5t4s545qbf60m0000gp/T//RtmpwocDcy).
+#> Success! data as data.rds saved to `tempdir` (/var/folders/pk/h829gy097wn5t4s545qbf60m0000gp/T//Rtmp4veUV9).
 list.files(temp) # still empty, as default path out is tempdir.
 #> character(0)
 
 # you may append the date to the filename
 lazysave(data, dir = temp, date=TRUE, datesep = "", extension = "rdata")
-#> Success! data as data2026_10_01.RData saved to temp (/var/folders/pk/h829gy097wn5t4s545qbf60m0000gp/T//RtmpwocDcy/demo).
+#> Success! data as data2026_10_01.RData saved to temp (/var/folders/pk/h829gy097wn5t4s545qbf60m0000gp/T//Rtmp4veUV9/demo).
 # return file names 
 list.files(temp) # file saved.
 #> [1] "data2026_10_01.RData"
 
 # lazysave() doesn't mind dot(s) in extensions  (but rds is the default)
 lazysave(data, dir = temp, date=TRUE, datesep = "-", extension = ".r.ds.")
-#> Success! data as data-2026_10_01.rds saved to temp (/var/folders/pk/h829gy097wn5t4s545qbf60m0000gp/T//RtmpwocDcy/demo).
+#> Success! data as data-2026_10_01.rds saved to temp (/var/folders/pk/h829gy097wn5t4s545qbf60m0000gp/T//Rtmp4veUV9/demo).
 # lazysave() doesn't mind capitalisation or not in extension
 lazysave(data, dir = temp, extension = "RDATA")
-#> Success! data as data.RData saved to temp (/var/folders/pk/h829gy097wn5t4s545qbf60m0000gp/T//RtmpwocDcy/demo).
+#> Success! data as data.RData saved to temp (/var/folders/pk/h829gy097wn5t4s545qbf60m0000gp/T//Rtmp4veUV9/demo).
 ```
 
 ### sourcelines function
