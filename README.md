@@ -31,6 +31,8 @@ You can install the development version of rosenkohl from
 pak::pak("brueckmann/rosenkohl")
 ```
 
+The current development version is 0.0.0.9001.
+
 ## Examples
 
 ### ABC function
@@ -170,23 +172,23 @@ dir.create(temp)
 
 
 lazysave(data)
-#> Success! data as data.rds saved to `tempdir` (/var/folders/pk/h829gy097wn5t4s545qbf60m0000gp/T//Rtmp4veUV9).
+#> Success! data as data.rds saved to `tempdir` (/var/folders/pk/h829gy097wn5t4s545qbf60m0000gp/T//RtmpoMVex2).
 list.files(temp) # still empty, as default path out is tempdir.
 #> character(0)
 
 # you may append the date to the filename
 lazysave(data, dir = temp, date=TRUE, datesep = "", extension = "rdata")
-#> Success! data as data2026_10_01.RData saved to temp (/var/folders/pk/h829gy097wn5t4s545qbf60m0000gp/T//Rtmp4veUV9/demo).
+#> Success! data as data2026_10_01.RData saved to temp (/var/folders/pk/h829gy097wn5t4s545qbf60m0000gp/T//RtmpoMVex2/demo).
 # return file names 
 list.files(temp) # file saved.
 #> [1] "data2026_10_01.RData"
 
 # lazysave() doesn't mind dot(s) in extensions  (but rds is the default)
 lazysave(data, dir = temp, date=TRUE, datesep = "-", extension = ".r.ds.")
-#> Success! data as data-2026_10_01.rds saved to temp (/var/folders/pk/h829gy097wn5t4s545qbf60m0000gp/T//Rtmp4veUV9/demo).
+#> Success! data as data-2026_10_01.rds saved to temp (/var/folders/pk/h829gy097wn5t4s545qbf60m0000gp/T//RtmpoMVex2/demo).
 # lazysave() doesn't mind capitalisation or not in extension
 lazysave(data, dir = temp, extension = "RDATA")
-#> Success! data as data.RData saved to temp (/var/folders/pk/h829gy097wn5t4s545qbf60m0000gp/T//Rtmp4veUV9/demo).
+#> Success! data as data.RData saved to temp (/var/folders/pk/h829gy097wn5t4s545qbf60m0000gp/T//RtmpoMVex2/demo).
 ```
 
 ### sourcelines function

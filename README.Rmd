@@ -33,6 +33,8 @@ You can install the development version of rosenkohl from [GitHub](https://githu
 pak::pak("brueckmann/rosenkohl")
 ```
 
+The current development version is `r utils::packageVersion("rosenkohl")`.
+
 ## Examples
 
 ### ABC function
